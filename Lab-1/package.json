@@ -1,0 +1,17 @@
+{
+  "name": "lab-1",
+  "version": "1.0.0",
+  "description": "Lab 1",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Puneet Sharma",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31",
+    "node-uuid": "^1.4.8"
+  }
+}
