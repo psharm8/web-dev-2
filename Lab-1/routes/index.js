@@ -5,8 +5,9 @@
  */
 
 const taskRoutes = require("./tasks");
-
+const commentsRoutes=require("./comments");
 const constructorMethod = (app) => {
+    app.use("/api/tasks", commentsRoutes);
     app.use("/api/tasks", taskRoutes);
 
     app.use("*", (req, res) => {

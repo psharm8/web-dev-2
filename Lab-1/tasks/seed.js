@@ -11,7 +11,7 @@ const tasks = data.tasks;
 dbConnection().then(db => {
     return db.dropDatabase().then(() => {
         return dbConnection;
-    }).then((db) => {
+    }).then(() => {
         return tasks
             .addTask("Make lab", "Make the first lab for CS-554. Maybe talk about dinosaurs in it, or something", 1)
             .then(() => {

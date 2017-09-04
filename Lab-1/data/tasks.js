@@ -58,6 +58,52 @@ let exportedMethods = {
             });
         });
     },
+    addCommentToTask(id, name, comment) {
+        if (!id) {
+            return Promise.reject("You must provide a task id.");
+        }
+        if (!comment) {
+            return Promise.reject("No comment provided.");
+        }
+        if (!name) {
+            return Promise.reject("No name provided.");
+        }
+
+        return tasks().then(collection => {
+            let commentObj = {
+                _id: uuid.v4(),
+                name: name,
+                comment: comment
+            };
+            return collection.updateOne({
+                    _id: id
+                }, {
+                    $addToSet: {
+                        "comments": commentObj
+                    }
+                })
+                .then(() => {
+                    return this.getTaskById(id);
+                });
+        });
+    },
+    deleteCommentFromTask(taskId, commentId) {
+        return tasks().then(collection => {
+            return collection.updateOne({
+                    _id: taskId
+                }, {
+                    $pull: {
+                        "comments": {
+                            _id: commentId
+                        }
+                    }
+                })
+                .then(() => {
+                    return this.getTaskById(taskId);
+                });
+        });
+
+    },
     updateTask(id, updated) {
         if (!id) {
             return Promise.reject("You must provide an id to update.");
@@ -155,6 +201,25 @@ let exportedMethods = {
                 if (deletionInfo.deletedCount === 0) {
                     throw (`Could not delete Task with id : ${id}`);
                 }
+            });
+        });
+    },
+    getCommentByTaskAndCommentId(taskId, commentId) {
+        if (!taskId) {
+            return Promise.reject("You must provide a task id.");
+        }
+        if (!commentId) {
+            return Promise.reject("You must provide a comment id.");
+        }
+        return tasks().then(collection => {
+            return collection.findOne({
+                _id: taskId,
+                "comments._id": commentId
+            }).then(c => {
+                if (!c) {
+                    throw "Comment not found";
+                }
+                return c;
             });
         });
     }

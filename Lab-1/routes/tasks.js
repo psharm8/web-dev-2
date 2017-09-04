@@ -24,7 +24,7 @@ router.get("/:id",
 router.put("/:id",
     (req, res) => {
         let updatedData = req.body;
-        taskData.getTaskById(req.params.id).then(task => {
+        taskData.getTaskById(req.params.id).then(() => {
                 return taskData.updateTask(req.params.id, updatedData)
                     .then(updated => {
                             res.json(updated);
@@ -44,7 +44,7 @@ router.put("/:id",
 router.patch("/:id",
     (req, res) => {
         let updatedData = req.body;
-        taskData.getTaskById(req.params.id).then(task => {
+        taskData.getTaskById(req.params.id).then(() => {
                 return taskData.patchTask(req.params.id, updatedData)
                     .then(updated => {
                             res.json(updated);
