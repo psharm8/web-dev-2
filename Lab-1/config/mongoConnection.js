@@ -3,7 +3,7 @@ const mongoClient = require("mongodb").MongoClient;
 const settings = {
     mongoConfig: {
         serverUrl: "mongodb://localhost:27017/",
-        database: "Sharma-Puneet-CS54-Lab1"
+        database: "Sharma-Puneet-CS554-Lab1"
     }
 };
 
