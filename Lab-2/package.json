@@ -1,0 +1,14 @@
+{
+  "name": "lab-2",
+  "version": "1.0.0",
+  "description": "Lab 2",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Puneet Sharma",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}
