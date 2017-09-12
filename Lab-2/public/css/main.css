@@ -10,6 +10,14 @@ body {
 main {    
     margin-left: 40px;
 }
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+    margin-bottom: 5px;
+}
+h1 {
+    text-align: center;
+    border-bottom: 1px solid #AFAFAF;
+}
 nav {
     float: none;
     width: auto;
@@ -38,7 +46,7 @@ nav ul li {
 
 @media screen and (min-width: 500px) {
     nav {width: 25%; float: left;}
-    main {margin-left: 25%; padding-top: 1em; padding-left: 1em; width: 50%; }
+    main {margin-left: 25%; padding-top: 1em; width: 50%; }
     .flex-container article {flex: 1 0 40%;
         margin: 10px; }
 }
