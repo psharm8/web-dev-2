@@ -1,39 +1,71 @@
 * {
     box-sizing: border-box;
 }
+
 body {
-    background: #FEFEFE;
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-    font-size: 15pt;
+    background: whitesmoke;
+    font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+    font-size: 13px;
     overflow: auto;
 }
-main {    
+/* 
+main {
     margin-left: 40px;
-}
-h1, h2, h3, h4, h5, h6 {
+} */
+
+h1 {
     color: #333;
     margin-bottom: 5px;
-}
-h1 {
     text-align: center;
     border-bottom: 1px solid #AFAFAF;
 }
+
+h2 {
+    text-align: center;
+    margin: 5px;
+    font-size: 1rem;
+    border-bottom: 1px solid #AFAFAF;
+}
+
 nav {
     float: none;
     width: auto;
 }
+
 .flex-container {
     display: flex;
     flex-wrap: wrap;
-    background-color: lightgrey;
+    margin: 0 2em;
     max-width: 800px;
 }
-.flex-container article {    
-    flex: 1 0 90%;  
-    border: 1px solid cornflowerblue;
-    margin: 4px;
+.flex-container article .content{
+    box-sizing: border-box;    
+    height: 100%;
+    border: 1px solid cornflowerblue;    
+    background-color: lightgray;
+    border-radius: 4px;
     padding: 2px;
+}
+.flex-container article {
     
+    flex: 1 0 90%;    
+    padding: 0.5em;
+}
+
+.showtime {
+    font-size: .8rem;
+    text-align: center;
+    margin: auto;
+}
+
+.summary {
+    font-size: 1em;
+    text-align: justify;
+    margin: auto;
+}
+
+nav ul {
+    padding: 0 2em;
 }
 nav ul li {
     background: #CDF0F6;
@@ -44,14 +76,31 @@ nav ul li {
     padding: 2px;
 }
 
-@media screen and (min-width: 500px) {
-    nav {width: 25%; float: left;}
-    main {margin-left: 25%; padding-top: 1em; width: 50%; }
-    .flex-container article {flex: 1 0 40%;
-        margin: 10px; }
-}
-@media screen and (min-width: 800px) {
-    .flex-container article {flex: 1 0 30%;
-        margin: 10px; }
+img {
+    display: block;
+    width: 99px;
+    height: 144px;
+    margin: auto;
 }
 
+@media screen and (min-width: 500px) {
+    nav {
+        width: 25%;
+        float: left;
+    }
+    .flex-container {
+        margin-left: 25%;
+        margin-top: 1.1rem;
+        width: 50%
+    }
+    .flex-container article {
+        flex: 1 0 50%;        
+    }
+  
+}
+
+@media screen and (min-width: 800px) {
+    .flex-container article {
+        flex: 1 0 33%;
+    }
+}
