@@ -1,10 +1,10 @@
 <h1 class="text-center">{{pageTitle}}</h1>
 <div class="row">
     <div class="col-sm-12 col-md-3">
-        <nav class="navbar navbar-light bg-dark">
+        <nav class="navbar navbar-dark bg-dark">
             <ul class="navbar-nav">
                 {{#each products}}
-                <li><a href="#{{productId}}">{{name}}</a></li>
+                <li><a class="nav-link" href="#{{productId}}">{{name}}</a></li>
                 {{/each}}
             </ul>
         </nav>
@@ -16,8 +16,8 @@
                 <div class="card" id="{{productId}}">
                     <img class="card-img-top" src="{{img}}" alt="{{name}}">
                     <div class="card-body">
-                        <h4 class="card-title" data-toggle="modal" data-target="#item-details" data-product-name="{{name}}" data-product-details="{{details}}"
-                            data-product-img="{{img}}"><a href="#">{{name}}</a></h4>
+                        <h2 class="card-title" data-toggle="modal" data-target="#item-details" data-product-name="{{name}}" data-product-details="{{details}}"
+                            data-product-img="{{img}}"><a href="#">{{name}}</a></h2>
                         <p class="card-text">{{summary}}</p>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="product-title">Modal title</h5>
+                        <h3 class="modal-title" id="product-title">Modal title</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
