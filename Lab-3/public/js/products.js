@@ -9,6 +9,7 @@ $(function() {
         var modal = $(e.currentTarget);
         modal.find('#product-title').text(productName);
         modal.find('#product-img').attr('src',img);
+        modal.find('#product-img').attr('alt',productName);
         modal.find('#product-details').text(details);
     });
 });
