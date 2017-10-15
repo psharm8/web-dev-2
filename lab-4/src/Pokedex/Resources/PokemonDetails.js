@@ -25,7 +25,7 @@ class PokemonDetails extends Component{
             <Panel className="resource-details" bsStyle="primary" header={name}>
                 <Row>
                     <Col sm={2}>
-                        <Image src={img}  />
+                        <Image src={img} alt={name} />
                     </Col>
                     <Col sm={10}>
                         <Row>

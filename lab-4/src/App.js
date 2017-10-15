@@ -11,9 +11,9 @@ class App extends Component {
             <Router>
                 <div className="App">
                     <div className="App-header">
-                        <h2>
+                        <h1>
                             <Link to="/">{this.props.title}</Link>
-                        </h2>
+                        </h1>
                         <cite>
                             Brought to you by {this.props.author} on{" "}
                             {this.props.now.toDateString()}
