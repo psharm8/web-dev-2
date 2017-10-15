@@ -6,7 +6,7 @@ class Error extends Component{
         let statusText="Not found.";
         if(this.props.location.state){
             status=this.props.location.state.status;
-            statusText=this.props.state.statusText;
+            statusText=this.props.location.state.statusText;
         }
         //const {status, statusText}=this.props.location.state;
         return (
