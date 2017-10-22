@@ -1,11 +1,21 @@
 {
-  "name": "lab-6",
-  "version": "1.0.0",
-  "description": "Lab 6",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Puneet Sharma",
-  "license": "MIT"
+    "name": "lab-6",
+    "version": "1.0.0",
+    "description": "Lab 6",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "author": "Puneet Sharma",
+    "license": "MIT",
+    "dependencies": {
+        "axios": "^0.17.0",
+        "bluebird": "^3.5.1",
+        "body-parser": "^1.18.2",
+        "express": "^4.16.2",
+        "node-redis": "^0.1.7",
+        "node-redis-pubsub": "^1.0.3",
+        "node-uuid": "^1.4.8",
+        "redis": "^2.8.0"
+    }
 }
