@@ -1,0 +1,19 @@
+{
+  "name": "lab-5",
+  "version": "1.0.0",
+  "description": "Lab 5",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Puneet Sharma",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "express": "^4.16.2",
+    "flat": "^4.0.0",
+    "node-redis": "^0.1.7",
+    "redis": "^2.8.0"
+  }
+}
