@@ -79,9 +79,87 @@ let deletePerson = (message, channel) => {
     }
 };
 
-let addPerson = (message, channel) => {};
+let addPerson = (message, channel) => {
+    const { requestId, successEventName, failedEventName, data } = message;
+    let person = data.person;
+    let badRequest = !person;
+    if (!badRequest) {
+        const { first_name, last_name, email, gender, ip_address } = person;
+        badRequest = !(
+            first_name &&
+            last_name &&
+            email &&
+            gender &&
+            ip_address
+        );
+    }
+    if (badRequest) {
+        redisConnection.emit(failedEventName, {
+            requestId: requestId,
+            data: {
+                code: 400,
+                message:
+                    "Please provide all person details (first_name, last_name, email, gender, ip_address)"
+            }
+        });
+    } else {
+        let max = people.map(p => p.id).reduce((p, c) => {
+            let m = Math.max(p, c);
+            return m;
+        });
+        person.id = max + 1;
+        people.push(person);
+        redisConnection.emit(successEventName, {
+            requestId: requestId,
+            data: person
+        });
+    }
+};
 
-let updatePerson = (message, channel) => {};
+let updatePerson = (message, channel) => {
+    const { requestId, successEventName, failedEventName, data } = message;
+    let id = parseInt(data.id);
+    let badRequest = isNaN(id);
+    let error = "Invalid Id.";
+
+    let person = data.person;
+    if (!badRequest && !person) {
+        error = "Please provide person details";
+    }
+    if (!badRequest && person.id) {
+        error = "Cannot update id of a person.";
+        badRequest = true;
+    }
+
+    if (badRequest) {
+        redisConnection.emit(failedEventName, {
+            requestId: requestId,
+            data: {
+                code: 400,
+                message: error
+            }
+        });
+    } else {
+        let index = people.findIndex(p => p.id === id);
+        if (index < 0) {
+            redisConnection.emit(failedEventName, {
+                requestId: requestId,
+                data: {
+                    code: 404,
+                    message: "Person not found."
+                }
+            });
+        } else {
+            let original = people[index];
+            let updated = Object.assign(original, person);
+
+            redisConnection.emit(successEventName, {
+                requestId: requestId,
+                data: updated
+            });
+        }
+    }
+};
 
 response.then(r => {
     people = r.data;
