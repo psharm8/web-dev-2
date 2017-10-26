@@ -1,12 +1,14 @@
 const redisConnection = require("./redis-connection");
 const axios = require("axios");
-let response = axios.get(
-    "https://gist.githubusercontent.com/philbarresi/5cf15393d245b38a2d86ce8207d5076c/raw/d529fb474c1af347702ca4d7b992256237fa2819/lab5.json"
-);
 
 let people = [];
 let getPerson = (message, channel) => {
-    const { requestId, successEventName, failedEventName, data } = message;
+    const {
+        requestId,
+        successEventName,
+        failedEventName,
+        data
+    } = message;
 
     let id = parseInt(data.id);
     if (isNaN(id)) {
@@ -37,7 +39,12 @@ let getPerson = (message, channel) => {
 };
 
 let deletePerson = (message, channel) => {
-    const { requestId, successEventName, failedEventName, data } = message;
+    const {
+        requestId,
+        successEventName,
+        failedEventName,
+        data
+    } = message;
 
     let id = parseInt(data.id);
     if (isNaN(id)) {
@@ -80,11 +87,22 @@ let deletePerson = (message, channel) => {
 };
 
 let addPerson = (message, channel) => {
-    const { requestId, successEventName, failedEventName, data } = message;
+    const {
+        requestId,
+        successEventName,
+        failedEventName,
+        data
+    } = message;
     let person = data.person;
     let badRequest = !person;
     if (!badRequest) {
-        const { first_name, last_name, email, gender, ip_address } = person;
+        const {
+            first_name,
+            last_name,
+            email,
+            gender,
+            ip_address
+        } = person;
         badRequest = !(
             first_name &&
             last_name &&
@@ -98,15 +116,11 @@ let addPerson = (message, channel) => {
             requestId: requestId,
             data: {
                 code: 400,
-                message:
-                    "Please provide all person details (first_name, last_name, email, gender, ip_address)"
+                message: "Please provide all person details (first_name, last_name, email, gender, ip_address)"
             }
         });
     } else {
-        let max = people.map(p => p.id).reduce((p, c) => {
-            let m = Math.max(p, c);
-            return m;
-        });
+        let max = people.map(p => p.id).reduce((p, c) => Math.max(p, c));
         person.id = max + 1;
         people.push(person);
         redisConnection.emit(successEventName, {
@@ -117,7 +131,12 @@ let addPerson = (message, channel) => {
 };
 
 let updatePerson = (message, channel) => {
-    const { requestId, successEventName, failedEventName, data } = message;
+    const {
+        requestId,
+        successEventName,
+        failedEventName,
+        data
+    } = message;
     let id = parseInt(data.id);
     let badRequest = isNaN(id);
     let error = "Invalid Id.";
@@ -161,12 +180,17 @@ let updatePerson = (message, channel) => {
     }
 };
 
-response.then(r => {
-    people = r.data;
+let startWorker = async() => {
+    let resp = await axios.get(
+        "https://gist.githubusercontent.com/philbarresi/5cf15393d245b38a2d86ce8207d5076c/raw/d529fb474c1af347702ca4d7b992256237fa2819/lab5.json"
+    );
+    people = resp.data;
     console.log("Data Loaded!");
 
     redisConnection.on("get-person:request:*", getPerson);
     redisConnection.on("delete-person:request:*", deletePerson);
     redisConnection.on("add-person:request:*", addPerson);
     redisConnection.on("update-person:request:*", updatePerson);
-});
+};
+
+startWorker();
